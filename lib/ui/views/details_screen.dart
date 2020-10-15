@@ -130,11 +130,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 8.0),
-                              child: Row(
+                              child: Wrap(
+                                spacing: 8.0,
+                                runSpacing: 8.0,
                                 children: List<Widget>.generate(
                                     movie.genres.length,
                                     (index) =>
-                                        LabelMovie(title: movie.genres[index])),
+                                        GenreMovie(title: movie.genres[index])),
                               ),
                             ),
                             Column(
@@ -200,15 +202,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
   }
 }
 
-class LabelMovie extends StatelessWidget {
+class GenreMovie extends StatelessWidget {
   final String title;
 
-  LabelMovie({@required this.title});
+  GenreMovie({@required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: 10.0),
       padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
           color: Color(0XFFFEFEFF),
