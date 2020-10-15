@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tmdbapp/core/constants/app_constants.dart';
 import 'package:tmdbapp/core/constants/route_paths.dart';
 import 'package:tmdbapp/core/models/movie.dart';
@@ -13,6 +14,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(
       title: AppConstants.title,
       debugShowCheckedModeBanner: false,
