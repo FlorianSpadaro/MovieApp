@@ -115,14 +115,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   padding: const EdgeInsets.only(right: 10.0),
                                   child: Icon(
                                     Icons.grade,
-                                    color: Colors.orangeAccent,
+                                    color: kThirdColor,
                                     size: 15.0,
                                   ),
                                 ),
                                 Text(
                                   movie.rate.toString(),
                                   style: TextStyle(
-                                      color: Colors.orangeAccent,
+                                      color: kThirdColor,
                                       fontWeight: FontWeight.w900,
                                       fontSize: 15.0),
                                 ),
