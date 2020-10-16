@@ -97,4 +97,10 @@ class Api {
         movie); //On récupère l'âge requis du film
     return movie;
   }
+
+  Future<Movie> getMostPopularMovie() async {
+    List<Movie> popularMovies = await getPopularMovies();
+    await Future.delayed(Duration(seconds: 3));
+    return popularMovies[0];
+  }
 }

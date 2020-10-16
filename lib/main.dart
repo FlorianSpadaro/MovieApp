@@ -6,6 +6,7 @@ import 'package:tmdbapp/core/models/movie.dart';
 import 'package:tmdbapp/ui/shared/app_colors.dart';
 import 'package:tmdbapp/ui/views/details_screen.dart';
 import 'package:tmdbapp/ui/views/home_screen.dart';
+import 'package:tmdbapp/ui/views/login_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,9 +23,13 @@ class MyApp extends StatelessWidget {
           primaryColor: kMainColor,
           accentColor: kSecondaryColor,
           scaffoldBackgroundColor: kMainColor),
-      initialRoute: RoutePaths.Home,
+      initialRoute: RoutePaths.Login,
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
+          case RoutePaths.Login:
+            return MaterialPageRoute(
+              builder: (_) => LoginScreen(),
+            );
           case RoutePaths.Home:
             return MaterialPageRoute(builder: (_) => HomeScreen());
           case RoutePaths.Details:
