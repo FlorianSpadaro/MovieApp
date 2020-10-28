@@ -79,7 +79,7 @@ class _BottomFormWidgetState extends State<BottomFormWidget> {
                   color: widget.secondaryColor,
                   text: widget.submitLabel,
                   textColor: widget.mainColor),
-            )
+            ),
           ],
         ),
       ),

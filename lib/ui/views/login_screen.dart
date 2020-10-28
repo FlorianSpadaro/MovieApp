@@ -5,10 +5,10 @@ import 'package:tmdbapp/core/services/api.dart';
 import 'package:tmdbapp/ui/shared/app_colors.dart';
 import 'package:tmdbapp/ui/shared/app_styles.dart';
 import 'package:tmdbapp/ui/views/splash_screen.dart';
-import 'package:tmdbapp/ui/widgets/bottom_form_widget.dart';
+import 'package:tmdbapp/ui/widgets/authentication/login_widget.dart';
+import 'package:tmdbapp/ui/widgets/authentication/sign_in_widget.dart';
+import 'package:tmdbapp/ui/widgets/authentication/sign_up_wiget.dart';
 import 'package:tmdbapp/ui/widgets/logo_widget.dart';
-import 'package:tmdbapp/ui/widgets/rounded_button_widget.dart';
-import 'package:tmdbapp/ui/widgets/text_field_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -17,7 +17,36 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   Api api = Api();
-  final _formKey = GlobalKey<FormState>();
+  LoginWidget loginWidget;
+  SignInWidget signInWidget;
+  SingUpWidget singUpWidget;
+  Widget widgetToShow;
+
+  @override
+  void initState() {
+    super.initState();
+    signInWidget = SignInWidget(
+        onBack: () => setState(() {
+              widgetToShow = loginWidget;
+            }));
+    singUpWidget = SingUpWidget(
+        onBack: () => setState(() {
+              widgetToShow = loginWidget;
+            }));
+    loginWidget = LoginWidget(
+      onTapSignInBtn: () {
+        setState(() {
+          widgetToShow = signInWidget;
+        });
+      },
+      onTapSignUpBtn: () {
+        setState(() {
+          widgetToShow = singUpWidget;
+        });
+      },
+    );
+    widgetToShow = loginWidget;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-                          getSignUpWidget()
+                          widgetToShow
                         ],
                       ),
                     ),
@@ -84,130 +113,5 @@ class _LoginScreenState extends State<LoginScreen> {
         });
   }
 
-  Widget getLoginWidget() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 50.0, left: 50.0, right: 50.0),
-      child: Column(
-        children: [
-          RoundedButton(
-            color: kMainColor,
-            text: 'Sign up',
-            textColor: kSecondaryColor,
-            onTap: () => null,
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          RoundedButton(
-            color: kSecondaryColor,
-            text: 'Sign in',
-            textColor: kMainColor,
-            onTap: () => null,
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget getSignInWidget() {
-    return BottomFormWidget(
-        title: 'Sign in',
-        form: Form(
-            key: _formKey,
-            child: Column(children: <Widget>[
-              TextFieldWidget(
-                color: kSecondaryColor,
-                icon: Icons.mail_outline,
-                label: 'Email',
-                validation: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(
-                height: 8.0,
-              ),
-              TextFieldWidget(
-                color: kSecondaryColor,
-                icon: Icons.lock_outline,
-                label: 'Password',
-                validation: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-              ),
-            ])),
-        submitLabel: 'Login',
-        onSubmit: () {
-          if (_formKey.currentState.validate()) {
-            Scaffold.of(context)
-                .showSnackBar(SnackBar(content: Text('Processing Data')));
-          }
-        },
-        onBack: () => null,
-        mainColor: kSecondaryColor,
-        secondaryColor: kMainColor);
-  }
-
-  Widget getSignUpWidget() {
-    return BottomFormWidget(
-        title: 'Sign up',
-        form: Form(
-            key: _formKey,
-            child: Column(children: <Widget>[
-              TextFieldWidget(
-                color: kSecondaryColor,
-                icon: Icons.mail_outline,
-                label: 'Email',
-                validation: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(
-                height: 8.0,
-              ),
-              TextFieldWidget(
-                color: kSecondaryColor,
-                icon: Icons.lock_outline,
-                label: 'Password',
-                validation: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(
-                height: 8.0,
-              ),
-              TextFieldWidget(
-                color: kSecondaryColor,
-                icon: Icons.lock_outline,
-                label: 'Confirmation',
-                validation: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-              ),
-            ])),
-        submitLabel: 'Create account',
-        onSubmit: () {
-          if (_formKey.currentState.validate()) {
-            Scaffold.of(context)
-                .showSnackBar(SnackBar(content: Text('Processing Data')));
-          }
-        },
-        onBack: () => null,
-        mainColor: kMainColor,
-        secondaryColor: kSecondaryColor);
-  }
+  void onBack() {}
 }
