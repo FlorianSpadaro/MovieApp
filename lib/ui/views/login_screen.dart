@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Authentication authentication;
   LoginWidget loginWidget;
   SignInWidget signInWidget;
-  SingUpWidget singUpWidget;
+  SignUpWidget signUpWidget;
   Widget widgetToShow;
 
   @override
@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
         onBack: () => setState(() {
               widgetToShow = loginWidget;
             }));
-    singUpWidget = SingUpWidget(
+    signUpWidget = SignUpWidget(
         authentication: authentication,
         onBack: () => setState(() {
               widgetToShow = loginWidget;
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       onTapSignUpBtn: () {
         setState(() {
-          widgetToShow = singUpWidget;
+          widgetToShow = signUpWidget;
         });
       },
     );
