@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tmdbapp/core/constants/route_paths.dart';
 import 'package:tmdbapp/core/models/movie.dart';
 import 'package:tmdbapp/core/services/api.dart';
+import 'package:tmdbapp/core/services/authentication.dart';
+import 'package:tmdbapp/ui/shared/app_colors.dart';
 import 'package:tmdbapp/ui/widgets/movies_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,6 +23,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => showAlertDialog(context),
+        backgroundColor: kThirdColor,
+        child: Icon(Icons.logout),
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -65,4 +73,43 @@ class MoviesListWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+void logOut(BuildContext context) {
+  Authentication.signOut()
+      .then((value) => Navigator.popAndPushNamed(context, RoutePaths.Login));
+}
+
+showAlertDialog(BuildContext context) {
+  Widget cancelButton = FlatButton(
+    child: Text("Cancel"),
+    onPressed: () => Navigator.pop(context),
+  );
+
+  Widget logOutButton = FlatButton(
+    child: Text(
+      "Log out",
+      style: TextStyle(color: Colors.red),
+    ),
+    onPressed: () {
+      Navigator.pop(context);
+      logOut(context);
+    },
+  );
+
+  AlertDialog alert = AlertDialog(
+    title: Text("Sign Out"),
+    content: Text("Do you want to log out?"),
+    actions: [
+      cancelButton,
+      logOutButton,
+    ],
+  );
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

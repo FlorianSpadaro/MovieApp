@@ -104,7 +104,6 @@ class Api {
 
   Future<Movie> getMostPopularMovie() async {
     List<Movie> popularMovies = await getPopularMovies();
-    await Future.delayed(Duration(seconds: 2));
     return popularMovies[0];
   }
 }

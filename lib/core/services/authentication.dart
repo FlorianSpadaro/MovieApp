@@ -1,20 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class Authentication {
-  Authentication() {
-    _initialization();
-  }
-
-  void _initialization() async {
-    await Firebase.initializeApp();
-  }
-
+  User currentUser;
   User getCurrentUser() {
-    User currentUser;
     FirebaseAuth.instance
         .authStateChanges()
-        .listen((User user) => currentUser = user);
+        .listen((User user) => this.currentUser = user);
     return currentUser;
   }
 
@@ -48,5 +39,9 @@ class Authentication {
       }
     }
     return 'Error';
+  }
+
+  static Future signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 }

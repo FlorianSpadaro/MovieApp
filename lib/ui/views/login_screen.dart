@@ -5,7 +5,6 @@ import 'package:tmdbapp/core/services/api.dart';
 import 'package:tmdbapp/core/services/authentication.dart';
 import 'package:tmdbapp/ui/shared/app_colors.dart';
 import 'package:tmdbapp/ui/shared/app_styles.dart';
-import 'package:tmdbapp/ui/views/splash_screen.dart';
 import 'package:tmdbapp/ui/widgets/authentication/login_widget.dart';
 import 'package:tmdbapp/ui/widgets/authentication/sign_in_widget.dart';
 import 'package:tmdbapp/ui/widgets/authentication/sign_up_wiget.dart';
@@ -27,8 +26,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    api = Api();
     authentication = Authentication();
+    api = Api();
     signInWidget = SignInWidget(
         authentication: authentication,
         onBack: () => setState(() {
@@ -115,7 +114,9 @@ class _LoginScreenState extends State<LoginScreen> {
           } else if (snapshot.hasError) {
             return ErrorWidget(snapshot.error);
           }
-          return SplashScreen();
+          return Container(
+            color: kMainColor,
+          );
         });
   }
 }
