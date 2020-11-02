@@ -19,8 +19,12 @@ class Api {
     List<Movie> movies = [];
     var data = await _getData(url);
     if (data != null) {
-      data['results']
-          .forEach((result) => movies.add(Movie.fromJSON(result, isTvShow)));
+      try {
+        data['results']
+            .forEach((result) => movies.add(Movie.fromJSON(result, isTvShow)));
+      } catch (e) {
+        print("Error: " + e.toString());
+      }
     }
     return movies;
   }
