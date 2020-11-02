@@ -10,6 +10,14 @@ class Authentication {
     await Firebase.initializeApp();
   }
 
+  User getCurrentUser() {
+    User currentUser;
+    FirebaseAuth.instance
+        .authStateChanges()
+        .listen((User user) => currentUser = user);
+    return currentUser;
+  }
+
   Future registration(String email, String password) async {
     try {
       await FirebaseAuth.instance
