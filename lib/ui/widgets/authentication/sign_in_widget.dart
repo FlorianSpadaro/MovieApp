@@ -72,7 +72,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                 .login(_emailController.text, _passwordController.text);
             isLoading(false);
             error == null
-                ? Navigator.pushNamed(context, RoutePaths.Home)
+                ? Navigator.popAndPushNamed(context, RoutePaths.Home)
                 : Scaffold.of(context)
                     .showSnackBar(SnackBar(content: Text(error)));
           }
