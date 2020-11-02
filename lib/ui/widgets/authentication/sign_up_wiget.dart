@@ -6,17 +6,17 @@ import 'package:tmdbapp/ui/shared/app_colors.dart';
 import 'package:tmdbapp/ui/widgets/bottom_form_widget.dart';
 import 'package:tmdbapp/ui/widgets/text_field_widget.dart';
 
-class SingUpWidget extends StatefulWidget {
+class SignUpWidget extends StatefulWidget {
   final Function onBack;
   final Authentication authentication;
-  SingUpWidget({Key key, @required this.authentication, this.onBack})
+  SignUpWidget({Key key, @required this.authentication, this.onBack})
       : super(key: key);
 
   @override
-  _SingUpWidgetState createState() => _SingUpWidgetState();
+  _SignUpWidgetState createState() => _SignUpWidgetState();
 }
 
-class _SingUpWidgetState extends State<SingUpWidget> {
+class _SignUpWidgetState extends State<SignUpWidget> {
   final _formKey = GlobalKey<FormState>();
 
   final _emailController = TextEditingController();
