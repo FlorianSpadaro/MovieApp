@@ -11,13 +11,16 @@ class LogoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      child: SvgPicture.asset(
-        'assets/images/tmdb_logo.svg',
-        semanticsLabel: 'TMDB Logo',
-        color: color,
+    return Hero(
+      tag: "logo",
+      child: Container(
+        width: width,
+        height: height,
+        child: SvgPicture.asset(
+          'assets/images/tmdb_logo.svg',
+          semanticsLabel: 'TMDB Logo',
+          color: color,
+        ),
       ),
     );
   }
