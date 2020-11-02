@@ -87,7 +87,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 .registration(_emailController.text, _passwordController.text);
             isLoading(false);
             error == null
-                ? Navigator.pushNamed(context, RoutePaths.Home)
+                ? Navigator.popAndPushNamed(context, RoutePaths.Home)
                 : Scaffold.of(context)
                     .showSnackBar(SnackBar(content: Text(error)));
           }
