@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tmdbapp/ui/shared/app_colors.dart';
 import 'package:tmdbapp/ui/shared/app_styles.dart';
+import 'package:tmdbapp/ui/widgets/loading_widget.dart';
 import 'package:tmdbapp/ui/widgets/rounded_button_widget.dart';
 
 class BottomFormWidget extends StatefulWidget {
@@ -10,17 +12,19 @@ class BottomFormWidget extends StatefulWidget {
   final Function onBack;
   final Color mainColor;
   final Color secondaryColor;
+  final bool isLoading;
 
-  BottomFormWidget({
-    Key key,
-    @required this.title,
-    @required this.form,
-    @required this.submitLabel,
-    @required this.onSubmit,
-    @required this.onBack,
-    @required this.mainColor,
-    @required this.secondaryColor,
-  }) : super(key: key);
+  BottomFormWidget(
+      {Key key,
+      @required this.title,
+      @required this.form,
+      @required this.submitLabel,
+      @required this.onSubmit,
+      @required this.onBack,
+      @required this.mainColor,
+      @required this.secondaryColor,
+      @required this.isLoading})
+      : super(key: key);
 
   @override
   _BottomFormWidgetState createState() => _BottomFormWidgetState();
@@ -74,11 +78,15 @@ class _BottomFormWidgetState extends State<BottomFormWidget> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: RoundedButton(
-                  onTap: widget.onSubmit,
-                  color: widget.secondaryColor,
-                  text: widget.submitLabel,
-                  textColor: widget.mainColor),
+              child: widget.isLoading
+                  ? LoadingWidget(
+                      color: widget.mainColor != kMainColor ? kMainColor : null,
+                    )
+                  : RoundedButton(
+                      onTap: widget.onSubmit,
+                      color: widget.secondaryColor,
+                      text: widget.submitLabel,
+                      textColor: widget.mainColor),
             ),
           ],
         ),

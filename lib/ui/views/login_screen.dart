@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:tmdbapp/core/models/movie.dart';
 import 'package:tmdbapp/core/services/api.dart';
+import 'package:tmdbapp/core/services/authentication.dart';
 import 'package:tmdbapp/ui/shared/app_colors.dart';
 import 'package:tmdbapp/ui/shared/app_styles.dart';
 import 'package:tmdbapp/ui/views/splash_screen.dart';
@@ -16,7 +17,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  Api api = Api();
+  Api api;
+  Authentication authentication;
   LoginWidget loginWidget;
   SignInWidget signInWidget;
   SingUpWidget singUpWidget;
@@ -25,11 +27,15 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
+    api = Api();
+    authentication = Authentication();
     signInWidget = SignInWidget(
+        authentication: authentication,
         onBack: () => setState(() {
               widgetToShow = loginWidget;
             }));
     singUpWidget = SingUpWidget(
+        authentication: authentication,
         onBack: () => setState(() {
               widgetToShow = loginWidget;
             }));
@@ -112,6 +118,4 @@ class _LoginScreenState extends State<LoginScreen> {
           return SplashScreen();
         });
   }
-
-  void onBack() {}
 }
